@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>Username: {{ user.user.username }}</h3>
+    <h3>Email: {{ user.user.email }}</h3>
+    <h3>First Name: {{ user.user.first_name }}</h3>
+    <p>{{ user.bio }}</p>
+    {% if user.image %}
+        <img src="{{ user.image.url }}" alt="rasm yo'q">
+    {% endif %}
+
+{% endblock %}

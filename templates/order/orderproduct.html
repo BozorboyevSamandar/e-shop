@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<div class="container">
+    <!-- row -->
+    <div class="row">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="col-md-6">
+                <div class="billing-details">
+
+                    <div class="section-title">
+                        <h4 class="title">Shipping Details</h4>
+                    </div>
+                    <p><label for="id_first_name">First name:</label>
+                        <input type="text" name="first_name" value="{{ user.first_name }}" class="input" maxlength="10"
+                               required id="id_first_name">
+                    </p>
+                    <p><label for="id_last_name">Last name:</label>
+                        <input type="text" name="last_name" value="{{ user.last_name }}" class="input" maxlength="10"
+                               required id="id_last_name">
+                    </p>
+                    <p><label for="id_city">City:</label>
+                        <select name="city" class="input" id="id_city">
+                            <option value="{{ profile.city }}" selected>{{ profile.city }}</option>
+                            <option value="Tashkent"> Tashkent</option>
+                            <option value="Tashkent.vil">Tashkent.vil</option>
+                            <option value="Fergana"> Fergana</option>
+                            <option value="Namangan"> Namangan</option>
+                            <option value="Buxoro"> Buxoro</option>
+                            <option value="Navoi"> Navoi</option>
+                            <option value="Samarqand"> Samarqand</option>
+                            <option value="Surkhandarya"> Surkhandarya</option>
+                            <option value="Kashkadarya"> Kashkadarya</option>
+                            <option value="Sirdarya"> Sirdarya</option>
+                            <option value="Jizzakh"> Jizzakh</option>
+                            <option value="Andijan"> Andijan</option>
+                            <option value="Xorazm"> Xorazm</option>
+                            <option value="Karakalpakistan"> Karakalpakistan</option>
+                        </select>
+
+                    </p>
+                    <p><label for="id_country">Country:</label>
+                        <input type="text" name="country" class="input" id="id_country" value="{{ profile.country }}">
+                    </p>
+                    <button type="submit" class="primary-btn">Complete Order</button>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="shiping-methods">
+                    <div class="section-title">
+                        <h4 class="title">Payment Information</h4>
+                    </div>
+                    <p><label for="id_first_name"> Total:</label>
+                        <input type="text" name="total" class="input" readonly value="{{ total }} so'm">
+
+                    </p>
+                    <p><label for="id_credit_card"> Credit Card Holder:</label>
+                        <input type="text" name="credit_card" class="input" readonly value=" ">
+
+                    </p>
+                    <p><label for="id_credit_card_number">Credit Card number:</label>
+                        <input type="text" name="credit_card_number" class="input" readonly value="">
+
+                    </p>
+                    <p><label for="id_credit_card_exp_date"> Credit Card Exp Date:</label>
+                        <input type="text" name="credit_card_exp_date" class="input" readonly value=" ">
+
+                    </p>
+                    <p><label for="id_credit_card_security_number"> Credit Card Security Number:</label>
+                        <input type="text" name="total" class="input" readonly value=" ">
+
+                    </p>
+
+
+                </div>
+            </div>
+        </form>
+        <div class="col-md-12">
+            <div class="order-summary clearfix">
+                <div class="section-title">
+                    <h3 class="title">Shopcart Product List</h3>
+                </div>
+                <table class="shopping-cart-table table">
+                    <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th></th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rs in shopcart %}
+                        <tr>
+                            <td class="thumb"><img src="{{ rs.product.image.url }}" style="width: 500px; height: 300px" alt=""></td>
+                            <td class="details">
+                                <a href="">{{ rs.product }}</a>
+
+                            </td>
+                            <td class="price text-center"><strong>{{ rs.product.price }}</strong><br></td>
+                            <td class="qty text-center"><strong>{{ rs.quantity }} </strong></td>
+                            <td class="total text-center"><strong class="primary-color">{{ rs.amount }}</strong></td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th class="empty" colspan="3"></th>
+                        <th>SUBTOTAL</th>
+                        <th colspan="2" class="sub-total">{{ total }}</th>
+                    </tr>
+                    <tr>
+                        <th class="empty" colspan="3"></th>
+                        <th>SHIPING</th>
+                        <td colspan="2">Free Shipping</td>
+                    </tr>
+                    <tr>
+                        <th class="empty" colspan="3"></th>
+                        <th>TOTAL</th>
+                        <th colspan="2" class="total">{{ total }}</th>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /row -->
+</div>
+
+</body>
+</html>

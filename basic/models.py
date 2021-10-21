@@ -12,7 +12,8 @@ class Category(models.Model):
     title = models.CharField(max_length=100, blank=False, null=False)
     description = models.TextField(blank=True, null=True)
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to='category_image/', blank=True, null=True)
+    image = models.ImageField(
+        upload_to='category_image/', blank=True, null=True)
     status = models.CharField(choices=STATUS, max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -52,7 +53,8 @@ class Product(models.Model):
     description = models.TextField()
     price = models.FloatField()
     slug = models.SlugField(unique=True)
-    image = models.ImageField(upload_to='product_image/', blank=False, null=False)
+    image = models.ImageField(
+        upload_to='product_image/', blank=False, null=False)
     count = models.IntegerField()
     status = models.CharField(choices=STATUS, max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -80,8 +82,10 @@ class Product(models.Model):
         self.slug = to_slug
         super().save(*args, **kwargs)
 
+
 class Advertising(models.Model):
-    img = models.ImageField(upload_to='advertising_img/', blank=False, null=False)
+    img = models.ImageField(upload_to='advertising_img/',
+                            blank=False, null=False)
     title = models.CharField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=120)
     description = models.TextField()

@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.text import slugify
-
 from basic.utils import get_random_code
 
 

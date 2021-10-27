@@ -1,9 +1,9 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
-
 from order.models import Shopcart
 from user.models import Profile
 from .models import Category, Product, Advertising
+
 
 
 def index(request):
@@ -49,6 +49,6 @@ def product_detail(request, slug):
     product_latest = Product.objects.all().order_by('-created_at')[:4]
     category = Category.objects.all()
     return render(request, 'product_detail.html',
-                  {'product': product, 'product_latest': product_latest, 'category': category})
+        {'product': product, 'product_latest': product_latest, 'category': category})
 
 
